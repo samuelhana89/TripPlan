@@ -55,6 +55,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RentACar\RentACarCreate.cs" />
+    <Compile Include="RentACar\RentACarDetails.cs" />
+    <Compile Include="RentACar\RentACarEdit.cs" />
+    <Compile Include="RentACar\RentACarListItem.cs" />
     <Compile Include="ThingstoDo\ThingsToDoCreate.cs" />
     <Compile Include="ThingstoDo\ThingsToDoDetails.cs" />
     <Compile Include="ThingstoDo\ThingsToDoEdit.cs" />
@@ -68,5 +72,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

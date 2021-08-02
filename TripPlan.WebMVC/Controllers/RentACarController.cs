@@ -4,20 +4,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TripPlan.Model.ThingstoDo;
+using TripPlan.Model.RentACar;
 using TripPlan.Services;
 
 namespace TripPlan.WebMVC.Controllers
 {
     [Authorize]
-    public class ThingstoDoController : Controller
+    public class RentACarController : Controller
     {
-        // GET: ThingstoDo
+        // GET: RentACar
         public ActionResult Index()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new ThingstoDoServices(userId);
-            var model = service.GetThingstoDo();
+            var service = new RentACarServices(userId);
+            var model = service.GetRentACar();
 
             return View(model);
         }
@@ -30,21 +30,23 @@ namespace TripPlan.WebMVC.Controllers
             return View();
         }
 
+        //ADD
+        // GET
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult create(ThingsToDoCreate model)
+        public ActionResult create(RentACarCreate model)
         {
             if (!ModelState.IsValid) return View(model);
 
-            var service = CreateThingsTodoService();
+            var service = CreateRentACarService();
 
-            if (service.CreateThingsToDo(model))
+            if (service.CreateRentACar(model))
             {
-                TempData["SaveResult"] = "Your Thing to do  was created";
+                TempData["SaveResult"] = ("Your car was created");
                 return RedirectToAction("Index");
             }
 
-            ModelState.AddModelError("", "Things to do  can not be created");
+            ModelState.AddModelError("", "car can not be created");
 
             return View(model);
         }
@@ -52,22 +54,22 @@ namespace TripPlan.WebMVC.Controllers
         public ActionResult Details(int id)
         {
 
-            var svc = CreateThingsTodoService();
-            var model = svc.GetThingsTodoById(id);
+            var svc = CreateRentACarService();
+            var model = svc.GetRentACarById(id);
 
             return View(model);
         }
 
         public ActionResult Edit(int id)
         {
-            var service = CreateThingsTodoService();
-            var detail = service.GetThingsTodoById(id);
+            var service = CreateRentACarService();
+            var detail = service.GetRentACarById(id);
             var model =
-                new ThingsToDoEdit
+                new RentACarEdit
                 {
-                    ThingsToDoId = detail.ThingsToDoId,
-                    Activity = detail.Activity,
-                    Description = detail.Description
+                    RentACarId = detail.RentACarId,
+                    CarName = detail.CarName,
+                    Year = detail.Year
 
                 };
 
@@ -76,32 +78,32 @@ namespace TripPlan.WebMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, ThingsToDoEdit model)
+        public ActionResult Edit(int id, RentACarEdit model)
         {
             if (!ModelState.IsValid) return View(model);
 
-            if (model.ThingsToDoId != id)
+            if (model.RentACarId != id)
             {
                 ModelState.AddModelError("", "Id not match");
                 return View(model);
             }
-            var service = CreateThingsTodoService();
+            var service = CreateRentACarService();
 
-            if (service.UpdateThingsToDo(model))
+            if (service.UpdateRentACar(model))
             {
-                TempData["SaveResult"] = "Your List of things to do was updated.";
+                TempData["SaveResult"] = ("Your car was updated.");
                 return RedirectToAction("Index");
             }
 
-            ModelState.AddModelError("", "Your List of things to do can not be updated.");
+            ModelState.AddModelError("", "Your car can not be updated.");
             return View(model);
         }
 
         [ActionName("Delete")]
         public ActionResult Delete(int id)
         {
-            var svc = CreateThingsTodoService();
-            var model = svc.GetThingsTodoById(id);
+            var svc = CreateRentACarService();
+            var model = svc.GetRentACarById(id);
 
             return View(model);
         }
@@ -111,18 +113,18 @@ namespace TripPlan.WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeletePost(int id)
         {
-            var service = CreateThingsTodoService();
+            var service = CreateRentACarService();
 
-            service.DeleteThingsTodo(id);
+            service.DeleteRentACar(id);
 
-            TempData["SaveResult"] = ("Your Thing to do  was Deleted.");
+            TempData["SaveResult"] = ("Your car  was Deleted.");
             return RedirectToAction("Index");
         }
 
-        private ThingstoDoServices CreateThingsTodoService()
+        private RentACarServices CreateRentACarService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new ThingstoDoServices(userId);
+            var service = new RentACarServices(userId);
             return service;
         }
     }

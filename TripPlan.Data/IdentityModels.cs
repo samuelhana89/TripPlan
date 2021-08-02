@@ -36,7 +36,7 @@ namespace TripPlan.Data
 
         public DbSet<ThingsToDo> thingsToDos { get; set; }
 
-        //public DbSet<RentACar> RentACars { get; set; }
+        public DbSet<RentACar> RentACars { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
