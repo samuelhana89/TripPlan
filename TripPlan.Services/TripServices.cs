@@ -64,5 +64,64 @@ namespace TripPlan.Services
             }
         }
 
+        //Get /id
+
+        public TripDetails GetTripById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Trips
+                    .Single(e => e.TripId == id && e.UserID == _userId);
+                return
+                    new TripDetails
+                    {
+                        TripId = entity.TripId,
+                        TripName = entity.TripName,
+                        DestinationCity = entity.DestinationCity,
+                        Description = entity.Description,
+                        StartDate = entity.StartDate
+                    };
+            }
+        }
+
+
+        // update 
+        public bool UpdateTrip(TripEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Trips
+                    .Single(e => e.TripId == model.TripId && e.UserID == _userId);
+
+                entity.TripName = model.TripName;
+                entity.DestinationCity = model.DestinationCity;
+                entity.Description = model.Description;
+                entity.StartDate = model.StartDate;
+
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        //Delete / id
+        public bool DeleteTrip(int tripId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Trips
+                    .Single(e => e.TripId == tripId && e.UserID == _userId);
+
+                ctx.Trips.Remove(entity);
+                return ctx.SaveChanges() == 1;
+
+            }
+        }
+
     }
 }
