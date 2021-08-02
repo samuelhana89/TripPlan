@@ -34,7 +34,7 @@ namespace TripPlan.Data
 
         public DbSet<Trip> Trips { get; set; }
 
-        //public DbSet<ThingsToDo> thingsToDos { get; set; }
+        public DbSet<ThingsToDo> thingsToDos { get; set; }
 
         //public DbSet<RentACar> RentACars { get; set; }
 

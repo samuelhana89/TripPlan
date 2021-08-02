@@ -170,6 +170,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ThingstoDoController.cs" />
     <Compile Include="Controllers\TripController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -240,6 +241,11 @@
     <Content Include="Views\Trip\Details.cshtml" />
     <Content Include="Views\Trip\Edit.cshtml" />
     <Content Include="Views\Trip\Delete.cshtml" />
+    <Content Include="Views\ThingstoDo\Index.cshtml" />
+    <Content Include="Views\ThingstoDo\create.cshtml" />
+    <Content Include="Views\ThingstoDo\Details.cshtml" />
+    <Content Include="Views\ThingstoDo\Edit.cshtml" />
+    <Content Include="Views\ThingstoDo\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
